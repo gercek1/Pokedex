@@ -1,4 +1,4 @@
-import './Styles.css';
+import './styles/index.scss';
 const saludar = () => {
     console.log("Hola, mundo!");
 }
