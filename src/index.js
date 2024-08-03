@@ -1,12 +1,50 @@
 import './styles/index.scss';
-// function listaProductos(producto,contenedor){
-//     contenedor.innerHTML = "";
-//     producto.forEach(productos => {
-//         const div = document.createElement("div");
-//         const h2 = document.createElement("h2");
-//         const figura = document.createElement("figure");
-//         const imagen = document.createElement("img");
+import axios from "axios";
 
+const URL_API = "https://pokeapi.co/api/v2/pokemon"
+
+const getPokemons = async(url) =>{
+    try {
+        const response = await axios.get(url);
+        return response.data.results
+    } catch (error) {
+        console.error("Error", error);
+        return null;
+    }
+}
+
+
+const obtenerUrlPokemons = async(listaPokemon) =>{
+    const detallesPokemons = [];
+    try {
+        for(const pokemon of listaPokemon){
+            const response = await axios.get(pokemon.url);
+
+            detallesPokemons.push({
+                id: response.data.id,
+                nombre: pokemon.name,
+                imagen: response.data.sprites.other.home.front_default
+            })
+        }
+        
+    } catch (error) {
+        console.error("Error", error);
+        
+    } finally{
+        return detallesPokemons;
+    }
+}
+
+document.addEventListener("DOMContentLoaded",async() => {
+    const pokemon = await getPokemons(URL_API);
+    console.log("getPokemon",pokemon);
+    const obternerPokemones = await obtenerUrlPokemons(pokemon);
+    console.log("obterner", obternerPokemones);
+})
+
+function pintarPokemones(pokemon,contenedor){
+    
+}
 //         imagen.setAttribute("src", productos.imagen);
 //         h2.textContent = productos.nombre;
 
@@ -38,3 +76,5 @@ import './styles/index.scss';
 // const contenedor = document.getElementById("prueba");
 
 // listaProductos(productos,contenedor);
+
+
