@@ -1,23 +1,50 @@
 import './styles/index.scss';
 import axios from "axios";
-const saludar = () => {
-    console.log("Hola, mundo!");
+
+const URL_API = "https://pokeapi.co/api/v2/pokemon"
+
+const getPokemons = async(url) =>{
+    try {
+        const response = await axios.get(url);
+        return response.data.results
+    } catch (error) {
+        console.error("Error", error);
+        return null;
+    }
 }
 
 
-const getPokemons = async() =>{
+const obtenerUrlPokemons = async(listaPokemon) =>{
+    const detallesPokemons = [];
     try {
-        const response = await axios.get("https://pokeapi.co/api/v2/pokemon");
-        console.log("response", response.data.results
-        );
+        for(const pokemon of listaPokemon){
+            const response = await axios.get(pokemon.url);
+
+            detallesPokemons.push({
+                id: response.data.id,
+                nombre: pokemon.name,
+                imagen: response.data.sprites.other.home.front_default
+            })
+        }
+        
     } catch (error) {
         console.error("Error", error);
         
+    } finally{
+        return detallesPokemons;
     }
 }
-saludar();
-getPokemons();
 
+document.addEventListener("DOMContentLoaded",async() => {
+    const pokemon = await getPokemons(URL_API);
+    console.log("getPokemon",pokemon);
+    const obternerPokemones = await obtenerUrlPokemons(pokemon);
+    console.log("obterner", obternerPokemones);
+})
+
+function pintarPokemones(pokemon,contenedor){
+    
+}
 //         imagen.setAttribute("src", productos.imagen);
 //         h2.textContent = productos.nombre;
 
