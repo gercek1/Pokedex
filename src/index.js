@@ -1,4 +1,5 @@
 import './styles/index.scss';
+
 // function listaProductos(producto,contenedor){
 //     contenedor.innerHTML = "";
 //     producto.forEach(productos => {
