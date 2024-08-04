@@ -26,6 +26,8 @@ const obtenerUrlPokemons = async (listaPokemon) => {
                     id: response.data.id,
                     nombre: pokemon.name,
                     imagen: response?.data.sprites.other.home.front_default || null,
+                    peso: response?.data.weight || null,
+
                 })
             }
         }
@@ -41,12 +43,14 @@ const obtenerUrlPokemons = async (listaPokemon) => {
 
 
 function pintarPokemonesMain(pokemons, contenedor) {
+    const lista = document.createElement("ul");
     pokemons.forEach(element => {
         const card = document.createElement("article");
         const card2 = document.createElement("article");
         const figure = document.createElement("figure");
         const imagen = document.createElement("img");
         const h2 = document.createElement("h2");
+        const peso = document.createElement("li");
 
         h2.textContent = element.nombre;
         imagen.setAttribute("src", element.imagen)
@@ -56,7 +60,10 @@ function pintarPokemonesMain(pokemons, contenedor) {
         figure.appendChild(imagen);
         card.appendChild(figure);
         contenedor.appendChild(card);
-
+        card2.appendChild(lista);
+        peso.textContent = `Peso: ${element.peso}kg`;
+        lista.appendChild(peso);
+        contenedor.appendChild(card2);
     });
 
 }
