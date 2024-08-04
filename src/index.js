@@ -3,6 +3,7 @@ import axios from "axios";
 
 const URL_API = "https://pokeapi.co/api/v2/pokemon"
 const contenedor = document.querySelector(".main")
+const footter = document.querySelector(".footer")
 
 const getPokemons = async (url) => {
     try {
@@ -41,32 +42,62 @@ const obtenerUrlPokemons = async (listaPokemon) => {
 
 
 function pintarPokemonesMain(pokemons, contenedor) {
-    pokemons.forEach(element => {
-        const card = document.createElement("article");
-        const card2 = document.createElement("article");
-        const figure = document.createElement("figure");
-        const imagen = document.createElement("img");
-        const h2 = document.createElement("h2");
+    pokemons.forEach((element, index) => {
+        if (index === 0) {
+            const card = document.createElement("article");
+            const card2 = document.createElement("article");
+            const figure = document.createElement("figure");
+            const imagen = document.createElement("img");
+            const h2 = document.createElement("h2");
 
-        h2.textContent = element.nombre;
-        imagen.setAttribute("src", element.imagen)
-        card.classList.add("card");
+            h2.textContent = element.nombre;
+            imagen.setAttribute("src", element.imagen)
+            card.classList.add("card");
 
-        card.appendChild(h2);
-        figure.appendChild(imagen);
-        card.appendChild(figure);
-        contenedor.appendChild(card);
+            card.appendChild(h2);
+            figure.appendChild(imagen);
+            card.appendChild(figure);
+            contenedor.appendChild(card);
 
+            return;
+        }
     });
 
 }
 
+function pintarPokemonesFooter(pokemons, contenedor) {
+    let count = 0;
+    let maxPokemon = 4;
+    pokemons.forEach((element) => {
+        if (count < maxPokemon) {
+            const card = document.createElement("article");
+            const card2 = document.createElement("article");
+            const figure = document.createElement("figure");
+            const imagen = document.createElement("img");
+            const h2 = document.createElement("h2");
 
+            h2.textContent = element.nombre;
+            imagen.setAttribute("src", element.imagen)
+            card.classList.add("card");
+
+            card.appendChild(h2);
+            figure.appendChild(imagen);
+            card.appendChild(figure);
+            contenedor.appendChild(card);
+
+            count++;
+        }else{
+            return;
+        }
+    });
+
+}
 document.addEventListener("DOMContentLoaded", async () => {
     const pokemon = await getPokemons(URL_API);
     const obternerPokemones = await obtenerUrlPokemons(pokemon);
     console.log("obterner pokemones", obternerPokemones);
     pintarPokemonesMain(obternerPokemones, contenedor);
+    pintarPokemonesFooter(obternerPokemones, footter);
 })
 //         imagen.setAttribute("src", productos.imagen);
 //         h2.textContent = productos.nombre;
