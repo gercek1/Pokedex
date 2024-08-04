@@ -2,8 +2,9 @@ import './styles/index.scss';
 import axios from "axios";
 
 const URL_API = "https://pokeapi.co/api/v2/pokemon"
+const contenedor = document.querySelector(".main")
 
-const getPokemons = async(url) =>{
+const getPokemons = async (url) => {
     try {
         const response = await axios.get(url);
         return response.data.results
@@ -14,37 +15,59 @@ const getPokemons = async(url) =>{
 }
 
 
-const obtenerUrlPokemons = async(listaPokemon) =>{
+const obtenerUrlPokemons = async (listaPokemon) => {
     const detallesPokemons = [];
     try {
-        for(const pokemon of listaPokemon){
-            const response = await axios.get(pokemon.url);
+        if (listaPokemon) {
+            for (const pokemon of listaPokemon) {
+                const response = await axios.get(pokemon.url);
 
-            detallesPokemons.push({
-                id: response.data.id,
-                nombre: pokemon.name,
-                imagen: response.data.sprites.other.home.front_default
-            })
+                detallesPokemons.push({
+                    id: response.data.id,
+                    nombre: pokemon.name,
+                    imagen: response?.data.sprites.other.home.front_default || null,
+                })
+            }
         }
-        
+
     } catch (error) {
         console.error("Error", error);
-        
-    } finally{
+
+    } finally {
         return detallesPokemons;
     }
 }
 
-document.addEventListener("DOMContentLoaded",async() => {
-    const pokemon = await getPokemons(URL_API);
-    console.log("getPokemon",pokemon);
-    const obternerPokemones = await obtenerUrlPokemons(pokemon);
-    console.log("obterner", obternerPokemones);
-})
 
-function pintarPokemones(pokemon,contenedor){
-    
+
+function pintarPokemonesMain(pokemons, contenedor) {
+    pokemons.forEach(element => {
+        const card = document.createElement("article");
+        const card2 = document.createElement("article");
+        const figure = document.createElement("figure");
+        const imagen = document.createElement("img");
+        const h2 = document.createElement("h2");
+
+        h2.textContent = element.nombre;
+        imagen.setAttribute("src", element.imagen)
+        card.classList.add("card");
+
+        card.appendChild(h2);
+        figure.appendChild(imagen);
+        card.appendChild(figure);
+        contenedor.appendChild(card);
+
+    });
+
 }
+
+
+document.addEventListener("DOMContentLoaded", async () => {
+    const pokemon = await getPokemons(URL_API);
+    const obternerPokemones = await obtenerUrlPokemons(pokemon);
+    console.log("obterner pokemones", obternerPokemones);
+    pintarPokemonesMain(obternerPokemones, contenedor);
+})
 //         imagen.setAttribute("src", productos.imagen);
 //         h2.textContent = productos.nombre;
 
