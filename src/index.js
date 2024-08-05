@@ -75,13 +75,14 @@ function actualizarMain(element, contenedor) {
 
     h2.textContent = element.nombre;
     imagen.setAttribute("src", element.imagen)
-    card.classList.add("card");
+    card.classList.add("main__card");
 
     card.appendChild(h2);
     figure.appendChild(imagen);
     card.appendChild(figure);
     contenedor.appendChild(card);
     card2.appendChild(lista);
+    card2.classList.add("main__card2");
     id.textContent = `ID: ${element.id}`;
     nivel.textContent = `Nivel: ${element.nivel}`;
     tipo.textContent = `Tipo: ${element.tipo}`;

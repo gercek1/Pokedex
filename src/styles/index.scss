@@ -16,3 +16,28 @@ header h1{
     text-transform: none;
     font-family:"Flexo-Regular", arial, sans-serif;
 }
+
+.main {
+    display: flex;
+    justify-content: space-around;
+
+    .main__card{
+      background-color: aqua;
+      h2{
+        text-align: center;
+      }
+    }
+    .main__card2{  // Equivalente a .main__card2
+      background-color: red;
+      ul{
+        list-style-type: none;
+        display:flex;
+        li{
+          padding: 10px;
+          border: 1px solid black;
+          
+        }
+      }
+      
+    }
+  }
