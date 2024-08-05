@@ -53,13 +53,14 @@ const pintarHeader = (header)=> {
     const figure = document.createElement("figure");
     const img = document.createElement("img");
     const h1 = document.createElement("h1");
-    h1.textContent = "Pokedex";
-    header.appendChild(h1);
     document.body.insertBefore(header, document.body.firstChild);
-    img.setAttribute("src", "./asset/logo.png");
+   // img.setAttribute("src", "./asset/pokebola.png");
     figure.appendChild(img);
     header.appendChild(figure);
-
+    h1.textContent = "P o k è d e x ";
+    header.appendChild(h1);
+    
+   
 }
 function pintarPokemonesMain(pokemons, contenedor) {
     pokemons.forEach((element, index) => {
@@ -96,7 +97,7 @@ function actualizarMain(element, contenedor) {
     card.appendChild(figure);
     contenedor.appendChild(card);
     card2.appendChild(lista);
-    card2.classList.add("main__card");
+    card2.classList.add("main__style");
     id.textContent = `ID: ${element.id}`;
     nivel.textContent = `Nivel: ${element.nivel}`;
     tipo.textContent = `Tipo: ${element.tipo}`;
