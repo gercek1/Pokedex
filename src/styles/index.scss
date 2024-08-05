@@ -9,6 +9,14 @@ body{
     min-height: 100vh;
 }
 
+.header{
+  background-color: #212121;
+  padding: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 header h1{
     color: #919191;
     cursor: default;
@@ -62,6 +70,7 @@ header h1{
           justify-content: center;
           align-items: center;
           width: 200px;
+          cursor: pointer;
           height: 98px;
           padding: 10px;
           border: 1px solid black;
@@ -73,7 +82,7 @@ header h1{
 
   .footer{
     display:flex;
-    gap: 50px;
+    gap: 40px;
     justify-content: center;
     align-items: center;
     background-color: #212121;

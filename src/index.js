@@ -1,7 +1,9 @@
 import './styles/index.scss';
 import axios from "axios";
 
+
 const URL_API = "https://pokeapi.co/api/v2/pokemon"
+const header = document.querySelector(".header");
 const contenedor = document.querySelector(".main")
 const footter = document.querySelector(".footer")
 
@@ -47,6 +49,18 @@ const obtenerUrlPokemons = async (listaPokemon) => {
 
 
 
+const pintarHeader = (header)=> {
+    const figure = document.createElement("figure");
+    const img = document.createElement("img");
+    const h1 = document.createElement("h1");
+    h1.textContent = "Pokedex";
+    header.appendChild(h1);
+    document.body.insertBefore(header, document.body.firstChild);
+    img.setAttribute("src", "./asset/logo.png");
+    figure.appendChild(img);
+    header.appendChild(figure);
+
+}
 function pintarPokemonesMain(pokemons, contenedor) {
     pokemons.forEach((element, index) => {
         if (index === 0) {
@@ -100,7 +114,7 @@ function actualizarMain(element, contenedor) {
 
 function pintarPokemonesFooter(pokemons, footer) {
     let count = 0;
-    let maxPokemon = 4;
+    let maxPokemon = 7;
     pokemons.forEach((element) => {
         if (count < maxPokemon) {
             const card = document.createElement("article");
@@ -133,6 +147,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     const pokemon = await getPokemons(URL_API);
     const obternerPokemones = await obtenerUrlPokemons(pokemon);
     console.log("obterner pokemones", obternerPokemones);
+    pintarHeader(header)
     pintarPokemonesMain(obternerPokemones, contenedor);
     pintarPokemonesFooter(obternerPokemones, footter);
 })
