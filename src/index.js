@@ -27,6 +27,12 @@ const obtenerUrlPokemons = async (listaPokemon) => {
                     id: response.data.id,
                     nombre: pokemon.name,
                     imagen: response?.data.sprites.other.home.front_default || null,
+                    peso: response?.data.weight || null,
+                    altura: response?.data.height || null,
+                    tipo: response?.data.types[0].type.name || null,
+                    nivel: response?.data.base_experience || null,
+                    habilidades: response?.data.abilities.map(habilidad => habilidad.ability.name).join(", ") || null,
+
                 })
             }
         }
@@ -42,6 +48,7 @@ const obtenerUrlPokemons = async (listaPokemon) => {
 
 
 function pintarPokemonesMain(pokemons, contenedor) {
+    const lista = document.createElement("ul");
     pokemons.forEach((element, index) => {
         if (index === 0) {
             const card = document.createElement("article");
@@ -49,6 +56,12 @@ function pintarPokemonesMain(pokemons, contenedor) {
             const figure = document.createElement("figure");
             const imagen = document.createElement("img");
             const h2 = document.createElement("h2");
+            const id = document.createElement("li");
+            const peso = document.createElement("li");
+            const altura = document.createElement("li");
+            const tipo = document.createElement("li");
+            const nivel = document.createElement("li");
+            const habilidad = document.createElement("li");
 
             h2.textContent = element.nombre;
             imagen.setAttribute("src", element.imagen)
@@ -58,8 +71,20 @@ function pintarPokemonesMain(pokemons, contenedor) {
             figure.appendChild(imagen);
             card.appendChild(figure);
             contenedor.appendChild(card);
-
-            return;
+            card2.appendChild(lista);
+            id.textContent = `ID: ${element.id}`;
+            nivel.textContent = `Nivel: ${element.nivel}`;
+            tipo.textContent = `Tipo: ${element.tipo}`;
+            habilidad.textContent = `Habilidades: ${element.habilidades}`;
+            peso.textContent = `Peso: ${element.peso}kg`;
+            altura.textContent = `Altura: ${element.altura}m`;
+            lista.appendChild(id);
+            lista.appendChild(nivel);
+            lista.appendChild(tipo);
+            lista.appendChild(peso);
+            lista.appendChild(habilidad);
+            lista.appendChild(altura);
+            contenedor.appendChild(card2);
         }
     });
 
@@ -86,7 +111,7 @@ function pintarPokemonesFooter(pokemons, contenedor) {
             contenedor.appendChild(card);
 
             count++;
-        }else{
+        } else {
             return;
         }
     });
