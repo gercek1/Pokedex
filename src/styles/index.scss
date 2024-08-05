@@ -1,11 +1,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&family=Playwrite+CU:wght@100..400&display=swap');
-
+@import "universal.scss";
 //variables SAS
 
 
 
 body{
     background-color: #424242;
+    min-height: 100vh;
 }
 
 header h1{
@@ -20,24 +21,129 @@ header h1{
 .main {
     display: flex;
     justify-content: space-around;
-
+    border-radius: 10px;
+    padding: 20px;
+    @media screen and (max-width: 600px){
+      flex-direction: column;
+    }
     .main__card{
-      background-color: aqua;
+      background-color: #fff;
+      border-radius: 10px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+      padding: 10px;
+      cursor: pointer;
+      transition: transform 0.2s, box-shadow 0.2s;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      &:hover{
+        transform: scale(1.05);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+      }
       h2{
         text-align: center;
+        text-transform: capitalize;
       }
+      img{
+        width: 100%;
+        height: auto;
+        object-fit: contain;
+      }
+
     }
-    .main__card2{  // Equivalente a .main__card2
-      background-color: red;
+    .main__card{  // Equivalente a .main__card2
       ul{
         list-style-type: none;
         display:flex;
+        flex-direction: column;
         li{
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          width: 200px;
+          height: 98px;
           padding: 10px;
           border: 1px solid black;
-          
         }
       }
       
     }
   }
+
+  .footer{
+    display:flex;
+    gap: 50px;
+    justify-content: center;
+    align-items: center;
+    background-color: #212121;
+    color: white;
+    text-align: center;
+    padding: 10px;
+    width: 100%;
+    height: auto;
+    font-family: "Playwrite-Regular", arial, sans-serif;
+    font-size: 150%;
+    line-height: 125%;
+    text-transform: none;
+    overflow-x: auto;
+    .card{
+      background-color: #f7f3f3;
+      border-radius: 10px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+      padding: 10px;
+      width: 134px; /* Tamaño fijo más pequeño para ajustarse mejor */
+      height: 150px;
+      cursor: pointer;
+      transition: transform 0.2s, box-shadow 0.2s;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      flex-shrink: 0; /* Evita que las tarjetas se encojan */
+      &:hover{
+        transform: scale(1.05);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+      }
+    }
+    
+    img{
+      width: 70px;
+      height: 70px;
+      object-fit: contain;
+      margin-bottom: 5px;
+    }
+
+    h2{
+      font-size: 0.9em;
+      padding: 5px;
+      color: #333;
+      text-transform: capitalize;
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+    }
+
+  }
+
+  @media (max-width: 600px) {
+    .footer {
+        flex-wrap: nowrap; /* Mantiene las tarjetas en una sola fila */
+        justify-content: flex-start; /* Alinea las tarjetas al inicio */
+    }
+    
+    .footer .card {
+        margin: 0 5px;
+        width: 80px;
+        height: 120px;
+    }
+
+    .footer .card img {
+        width: 60px;
+        height: 60px;
+    }
+
+    .footer .card h2 {
+        font-size: 0.8em;
+    }
+}

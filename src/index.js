@@ -82,7 +82,7 @@ function actualizarMain(element, contenedor) {
     card.appendChild(figure);
     contenedor.appendChild(card);
     card2.appendChild(lista);
-    card2.classList.add("main__card2");
+    card2.classList.add("main__card");
     id.textContent = `ID: ${element.id}`;
     nivel.textContent = `Nivel: ${element.nivel}`;
     tipo.textContent = `Tipo: ${element.tipo}`;
