@@ -1,13 +1,20 @@
 *{
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
 }
+
+$font-stack: "Flexo-Regular", arial, sans-serif;
+$primary-color: #424242;
+$secundary-color: #9E9E9E;
+$tertary-color: #f7f3f3;
 body{
-    background-color: #424242;
+    
+    background-color:$primary-color;
 }
 
 header{
-    background-color: #9E9E9E;
+    background-color: $secundary-color;
     padding: 10px;
     text-align:left;    
 }
@@ -15,11 +22,30 @@ header{
 header h1{
     margin: 0;
     font-weight: 300;
-    color: #f7f3f3;
+    color:$tertary-color;
     cursor: default;
     font-size: 187.5%;
     line-height: 125%;
     text-transform: none;
-    font-family:"Flexo-Regular", arial, sans-serif;
+    font-family:$font-stack;
 }
+ 
+main{
+    position: relative;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    padding: 32px;
+    cursor: pointer;
+    overflow: hidden;
+    figure{
+        position: relative;
+        display: flex;
+        img{
+            width: 60px;
+            height: .125rem;
 
+        }
+    }
+}
